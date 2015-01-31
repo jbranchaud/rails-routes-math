@@ -9,6 +9,12 @@ class ApplicationController < ActionController::Base
     render inline: "<h1><%= @result %></h1>"
   end
 
+  def multiply
+    # TODO: consider how to handle non-integer inputs
+    @result = params[:op1].to_i * params[:op2].to_i
+    render inline: "<h1><%= @result %></h1>"
+  end
+
   def bad_request
     render :nothing => true, :status => 400
   end

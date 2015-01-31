@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   get '/:op1/plus/:op2' => 'application#add', constraints: { :op1 => /[-]?\d+/, :op2 => /[-]?\d+/ }
   get '/:op1/plus/:op2' => 'application#bad_request'
 
+  get '/:op1/times/:op2' => 'application#multiply', constraints: { :op1 => /[-]?\d+/, :op2 => /[-]?\d+/ }
+  get '/:op1/times/:op2' => 'application#bad_request'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
