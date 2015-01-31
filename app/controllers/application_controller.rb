@@ -8,4 +8,8 @@ class ApplicationController < ActionController::Base
     render inline: "<h1><%= @result %></h1>"
   end
 
+  def bad_request
+    render :nothing => true, :status => 400
+  end
+
 end

@@ -19,4 +19,11 @@ RSpec.describe "AdditionRoutes", :type => :request do
     expect(page).to have_content("-10")
   end
 
+  it "should render 400 Bad Request when a non-number value is given" do
+    visit "/5/plus/a"
+    expect(page.status_code).to eq(400)
+    visit "/a/plus/5"
+    expect(page.status_code).to eq(400)
+  end
+
 end
