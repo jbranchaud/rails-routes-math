@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def add
+    # TODO: consider how to handle non-integer inputs
     @result = params[:op1].to_i + params[:op2].to_i
     render inline: "<h1><%= @result %></h1>"
   end
