@@ -2,6 +2,8 @@
 
 > Do math in your rails routes.
 
+Check out the [demo](https://secret-waters-8771.herokuapp.com/9/times/5).
+
 ## Up and running
 
 Make sure all your dependencies are covered:
