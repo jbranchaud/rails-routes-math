@@ -33,3 +33,9 @@ Navigating to `/-4/times/3` will render a page with `-12`.
 ### Do some division
 
 Navigating to `/9/by/3` will render a page with `3`.
+
+## License
+
+&copy; 2015 Josh Branchaud
+
+This project is licensed under the MIT license. See `LICENSE` for details.
