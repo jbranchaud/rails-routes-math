@@ -23,7 +23,6 @@ class ApplicationController < ActionController::Base
 
   def divide
     # TODO: consider how to handle non-integer inputs
-    bad_request and return if params[:op2].to_i == 0
     @result = params[:op1].to_i / params[:op2].to_i
     render inline: "<h1><%= @result %></h1>"
   end
