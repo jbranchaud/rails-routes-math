@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  root to: 'application#index'
+
   # reusable regex
   number = /[-]?\d+/
   number_with_anchors = /\A[-]?\d+\z/

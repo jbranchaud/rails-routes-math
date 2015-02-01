@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  def index
+    render file: '/app/views/index.html.erb'
+  end
+
   def add
     # TODO: consider how to handle non-integer inputs
     @result = params[:op1].to_i + params[:op2].to_i
