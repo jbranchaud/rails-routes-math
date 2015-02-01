@@ -1,4 +1,4 @@
-# rails-math
+# rails-routes-math
 
 > Do math in your rails routes.
 
