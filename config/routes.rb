@@ -3,28 +3,27 @@ Rails.application.routes.draw do
   root to: 'application#index'
 
   # reusable regex
+  operand = /(plus)|(minus)|(times)|(by)/
   number = /[-]?\d+/
-  number_with_anchors = /\A[-]?\d+\z/
+  not_zero = /[-]?[1-9]+[\.\d+]?/
 
-  get '/:op1/plus/:op2',
-    constraints: { :op1 => number, :op2 => number },
-    to: proc { |env| [200, {}, ["#{params(env)[:op1].to_i + params(env)[:op2].to_i}"]] }
-  get '/:op1/plus/:op2' => 'application#bad_request'
+  constraints op1: number do
+    constraints operand: operand do
+      constraints op2: number do
+        get '/:op1/plus/:op2',
+          to: proc { |env| [200, {}, ["#{params(env)[:op1].to_i + params(env)[:op2].to_i}"]] }
+        get '/:op1/minus/:op2',
+          to: proc { |env| [200, {}, ["#{params(env)[:op1].to_i - params(env)[:op2].to_i}"]] }
+        get '/:op1/times/:op2',
+          to: proc { |env| [200, {}, ["#{params(env)[:op1].to_i * params(env)[:op2].to_i}"]] }
+        get '/:op1/by/:op2',
+          constraints: { :op2 => not_zero },
+          to: proc { |env| [200, {}, ["#{params(env)[:op1].to_i / params(env)[:op2].to_i}"]] }
+      end
+    end
+  end
 
-  get '/:op1/minus/:op2',
-    constraints: { :op1 => number, :op2 => number },
-    to: proc { |env| [200, {}, ["#{params(env)[:op1].to_i - params(env)[:op2].to_i}"]] }
-  get '/:op1/minus/:op2' => 'application#bad_request'
-
-  get '/:op1/times/:op2',
-    constraints: { :op1 => number, :op2 => number },
-    to: proc { |env| [200, {}, ["#{params(env)[:op1].to_i * params(env)[:op2].to_i}"]] }
-  get '/:op1/times/:op2' => 'application#bad_request'
-
-  get '/:op1/by/:op2',
-    constraints: proc { |req| number_with_anchors === req.params[:op1] && number_with_anchors === req.params[:op2] && req.params[:op2].to_i != 0 },
-    to: proc { |env| [200, {}, ["#{params(env)[:op1].to_i / params(env)[:op2].to_i}"]] }
-  get '/:op1/by/:op2' => 'application#bad_request'
+  get '/:op1/:operand/:op2' => 'application#bad_request'
 
   match '*path', to: 'application#index', via: :GET
 
