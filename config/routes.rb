@@ -3,12 +3,12 @@ Rails.application.routes.draw do
   root to: redirect { |path_params, req| '/random' }
 
   # reusable regex
-  operand = /(plus)|(minus)|(times)|(by)/
+  operator = /(plus)|(minus)|(times)|(by)/
   number = /[-]?\d+/
   not_zero = /[-]?[1-9]+[\.\d+]?/
 
   constraints op1: number do
-    constraints operand: operand do
+    constraints operator: operator do
       constraints op2: number do
         get '/:op1/plus/:op2',
           to: proc { |env| [200, {}, ["#{params(env)[:op1].to_i + params(env)[:op2].to_i}"]] }
@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/:op1/:operand/:op2',
+  get '/:op1/:operator/:op2',
     to: proc { |env| [400, {}, ["400 Bad Request"]] }
 
   match '*path',
