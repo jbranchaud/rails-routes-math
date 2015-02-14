@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     to: proc { |env| [400, {}, ["400 Bad Request"]] }
 
   match '*path',
-    to: redirect { |path_params, req| "/#{(rand * 100).to_i}/#{%w[plus minus times by].sample}/#{(rand * 100).to_i}" },
+    to: redirect { |path_params, req| "/#{rand_int}/#{random_operator}/#{rand_int}" },
     via: :GET
 
 end
@@ -36,4 +36,12 @@ private
 
   def params(env)
     env['action_dispatch.request.path_parameters']
+  end
+
+  def rand_int(value=100)
+    (rand * value).to_i
+  end
+
+  def rand_operator
+    %w[plus minus times by].sample
   end
