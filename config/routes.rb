@@ -26,7 +26,9 @@ Rails.application.routes.draw do
   get '/:op1/:operand/:op2',
     to: proc { |env| [400, {}, ["400 Bad Request"]] }
 
-  match '*path', to: 'application#index', via: :GET
+  match '*path',
+    to: redirect { |path_params, req| "/#{(rand * 100).to_i}/#{%w[plus minus times by].sample}/#{(rand * 100).to_i}" },
+    via: :GET
 
 end
 
