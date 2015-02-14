@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root to: 'application#index'
+  root to: redirect { |path_params, req| '/random' }
 
   # reusable regex
   operand = /(plus)|(minus)|(times)|(by)/
