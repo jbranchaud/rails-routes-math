@@ -23,7 +23,8 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/:op1/:operand/:op2' => 'application#bad_request'
+  get '/:op1/:operand/:op2',
+    to: proc { |env| [400, {}, ["400 Bad Request"]] }
 
   match '*path', to: 'application#index', via: :GET
 
