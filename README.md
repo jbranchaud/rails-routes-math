@@ -2,7 +2,8 @@
 
 > Do math in your rails routes.
 
-Check out the [demo](https://secret-waters-8771.herokuapp.com/9/times/5).
+First, check out [`config/routes.rb`](config/routes.rb), all the business
+logic is there. Then see the [demo](https://secret-waters-8771.herokuapp.com/9/times/5).
 
 ## Up and running
 
