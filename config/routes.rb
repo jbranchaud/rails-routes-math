@@ -11,20 +11,20 @@ Rails.application.routes.draw do
     constraints operator: operator do
       constraints op2: number do
         get '/:op1/plus/:op2',
-          to: proc { |env| [200, {}, ["#{params(env)[:op1].to_i + params(env)[:op2].to_i}"]] }
+          to: ->(env) { [200, {}, ["#{params(env)[:op1].to_i + params(env)[:op2].to_i}"]] }
         get '/:op1/minus/:op2',
-          to: proc { |env| [200, {}, ["#{params(env)[:op1].to_i - params(env)[:op2].to_i}"]] }
+          to: ->(env) { [200, {}, ["#{params(env)[:op1].to_i - params(env)[:op2].to_i}"]] }
         get '/:op1/times/:op2',
-          to: proc { |env| [200, {}, ["#{params(env)[:op1].to_i * params(env)[:op2].to_i}"]] }
+          to: ->(env) { [200, {}, ["#{params(env)[:op1].to_i * params(env)[:op2].to_i}"]] }
         get '/:op1/by/:op2',
           constraints: { :op2 => not_zero },
-          to: proc { |env| [200, {}, ["#{params(env)[:op1].to_i / params(env)[:op2].to_i}"]] }
+          to: ->(env) { [200, {}, ["#{params(env)[:op1].to_i / params(env)[:op2].to_i}"]] }
       end
     end
   end
 
   get '/:op1/:operator/:op2',
-    to: proc { |env| [400, {}, ["400 Bad Request"]] }
+    to: ->(env) { [400, {}, ["400 Bad Request"]] }
 
   match '*path',
     to: redirect { |path_params, req| "/#{rand_int}/#{random_operator}/#{rand_int}" },
