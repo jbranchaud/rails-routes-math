@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     to: ->(env) { [400, {}, ["400 Bad Request"]] }
 
   match '*path',
-    to: redirect { |path_params, req| "/#{rand_int}/#{random_operator}/#{rand_int}" },
+    to: redirect { |path_params, req| "/#{rand_int}/#{rand_operator}/#{rand_int}" },
     via: :GET
 
 end
