@@ -39,7 +39,7 @@ private
   end
 
   def rand_int(value=100)
-    (rand * value).to_i
+    rand(0..value)
   end
 
   def rand_operator
